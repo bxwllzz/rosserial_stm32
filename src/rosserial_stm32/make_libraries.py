@@ -40,6 +40,9 @@ make_libraries.py generates the STM32 rosserial library files for SW4STM32.
 It requires the location of your SWSTM32 project folder.
 
 rosrun rosserial_stm32 make_libraries.py <output_path>
+
+example:
+rosrun rosserial_stm32 make_libraries.py path/to/project/Inc
 """
 
 import rospkg
@@ -87,9 +90,9 @@ rosserial_stm32_dir = rospack.get_path(THIS_PACKAGE)
 files = os.listdir(rosserial_stm32_dir+"/src/ros_lib")
 for f in files:
   if os.path.isfile(rosserial_stm32_dir+"/src/ros_lib/"+f):
-    shutil.copy(rosserial_stm32_dir+"/src/ros_lib/"+f, path+"/Inc/")
-rosserial_client_copy_files(rospack, path+"/Inc/")
+    shutil.copy(rosserial_stm32_dir+"/src/ros_lib/"+f, path+"/")
+rosserial_client_copy_files(rospack, path+"/")
 
 # generate messages
-rosserial_generate(rospack, path+"/Inc/", ROS_TO_EMBEDDED_TYPES)
+rosserial_generate(rospack, path+"/", ROS_TO_EMBEDDED_TYPES)
 
